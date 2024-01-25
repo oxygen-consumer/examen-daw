@@ -10,7 +10,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<PlaceholderContext>(options =>
+builder.Services.AddDbContext<ShopContext>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("DevConnection"));
 });
@@ -23,6 +23,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseCors(options =>
+    options.WithOrigins("http://localhost:4200")
+       .AllowAnyMethod()
+          .AllowAnyHeader()
+          );
 
 app.UseHttpsRedirection();
 
